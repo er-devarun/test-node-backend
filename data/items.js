@@ -1,34 +1,21 @@
 const fs = require('node:fs/promises');
 
 async function getStoredItems() {
-  try {
-    const rawFileContent = await fs.readFile('items.json', { encoding: 'utf-8' });
-    const data = JSON.parse(rawFileContent);
-    const storedItems = data.items ?? [];
-    return storedItems;
-  } catch (error) {
-    console.error('Error reading items.json:', error);
-    return [];
-  }
+  const rawFileContent = await fs.readFile('items.json', { encoding: 'utf-8' });
+  const data = JSON.parse(rawFileContent);
+  const storedItems = data.items ?? [];
+  return storedItems;
 }
 
 async function getItems() {
-  try {
-    const rawFileContent = await fs.readFile('itemsData.json', { encoding: 'utf-8' });
-    const data = JSON.parse(rawFileContent);
-    const items = data.items ?? [];
-    return items;
-  } catch (error) {
-    console.error('Error reading itemsData.json:', error);
-    return [];
-  }
+  const rawFileContent = await fs.readFile('itemsData.json', { encoding: 'utf-8' });
+  const data = await JSON.parse(rawFileContent);
+  const storedItems = data.items ?? [];
+  return storedItems;
 }
 
 function storeItems(items) {
-  return fs.writeFile('items.json', JSON.stringify({ items: items || [] }))
-    .catch(error => {
-      console.error('Error writing to items.json:', error);
-    });
+  return fs.writeFile('items.json', JSON.stringify({ items: items || [] }));
 }
 
 exports.getStoredItems = getStoredItems;
