@@ -1,17 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require("cors");
-const corsConfig = {
-  origin: "*",
-  credential: true,
-  methods: ["GET", "POST", "PUT", "DELETE"],
-};
 
 const { getStoredItems, storeItems } = require('./data/items');
 
 const app = express();
-app.options("", cors(corsConfig));
-app.use(cors(corsConfig));
 
 app.use(bodyParser.json());
 
@@ -24,7 +16,7 @@ app.use((req, res, next) => {
 
 app.get('/items', async (req, res) => {
   const storedItems = await getStoredItems();
-  // await new Promise((resolve, reject) => setTimeout(() => resolve(), 4000));
+  await new Promise((resolve, reject) => setTimeout(() => resolve(), 4000));
   res.json({ items: storedItems });
 });
 
