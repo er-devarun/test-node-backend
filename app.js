@@ -10,6 +10,7 @@ const corsConfig = {
 const { getStoredItems, storeItems } = require('./data/items');
 
 const app = express();
+app.options("", cors(corsConfig));
 app.use(cors(corsConfig));
 
 app.use(bodyParser.json());
