@@ -15,6 +15,11 @@ app.use((req, res, next) => {
 });
 
 app.get('/items', async (req, res) => {
+  await new Promise((resolve, reject) => setTimeout(() => resolve(), 4000));
+  res.json({ items: ["Hai, i'm listening"] });
+});
+
+app.get('/items', async (req, res) => {
   const storedItems = await getStoredItems();
   await new Promise((resolve, reject) => setTimeout(() => resolve(), 4000));
   res.json({ items: storedItems });
