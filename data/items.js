@@ -7,9 +7,17 @@ async function getStoredItems() {
   return storedItems;
 }
 
+async function getItems() {
+  const data = await fs.readFile('itemsData.js', { encoding: 'utf-8' });
+  // const data = JSON.parse(rawFileContent);
+  const storedItems = data.items ?? [];
+  return storedItems;
+}
+
 function storeItems(items) {
   return fs.writeFile('items.json', JSON.stringify({ items: items || [] }));
 }
 
 exports.getStoredItems = getStoredItems;
 exports.storeItems = storeItems;
+exports.getItems = getItems;
