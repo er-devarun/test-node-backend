@@ -16,7 +16,7 @@ async function getItems() {
   try {
     const rawFileContent = await fs.readFile('itemsData.json', { encoding: 'utf-8' });
     const data = JSON.parse(rawFileContent);
-    const items = data.items ?? [];
+    const items = data ?? [];
     return items;
   } catch (error) {
     console.error('Error reading itemsData.json:', error);
