@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const { getStoredItems, storeItems, getItems } = require('./data/items');
+const { getStoredItems, storeItems } = require('./data/items');
 
 const app = express();
 
@@ -12,12 +12,6 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   next();
-});
-
-app.get('/', async (req, res) => {
-  const storedItems = await getItems();
-  await new Promise((resolve, reject) => setTimeout(() => resolve(), 4000));
-  res.json({ items: storedItems});
 });
 
 app.get('/items', async (req, res) => {
