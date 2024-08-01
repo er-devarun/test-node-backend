@@ -1,11 +1,16 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require("cors");
+const corsConfig = {
+  origin: "*",
+  credential: true,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+};
 
 const { getStoredItems, storeItems } = require('./data/items');
 
 const app = express();
-app.use(cors());
+app.use(cors(corsConfig));
 
 app.use(bodyParser.json());
 
