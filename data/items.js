@@ -8,8 +8,8 @@ async function getStoredItems() {
 }
 
 async function getItems() {
-  const data = await fs.readFile('itemsData.js', { encoding: 'utf-8' });
-  // const data = JSON.parse(rawFileContent);
+  const rawFileContent = await fs.readFile('itemsData.json', { encoding: 'utf-8' });
+  const data = JSON.parse(rawFileContent);
   const storedItems = data.items ?? [];
   return storedItems;
 }
